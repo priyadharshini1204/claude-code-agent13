@@ -8,7 +8,7 @@ import yaml
 import re
 
 # Configuration
-API_KEY = os.environ.get("ANTHROPIC_API_KEY")
+API_KEY = os.environ.get("CLAUDE_API_KEY")
 MODELS = [
     "claude-3-haiku-20240307",     # Haiku (Fast) - Try this first since it worked
     "claude-3-5-sonnet-20240620",  # Sonnet 3.5
@@ -58,11 +58,11 @@ def run_command(command, log_file=None, check=False, cwd=None):
 
 def call_anthropic(prompt, task_context, logs):
     if not API_KEY:
-        log("Error: ANTHROPIC_API_KEY not set.")
+        log("Error: CLAUDE_API_KEY not set.")
         return None
         
     cleaned_key = API_KEY.strip()
-    url = "https://api.anthropic.com/v1/messages"
+    url = "https://api.claude.com/v1/messages"
     
     # Try models one by one
     for model_name in MODELS:
@@ -70,7 +70,7 @@ def call_anthropic(prompt, task_context, logs):
         
         headers = {
             "x-api-key": cleaned_key,
-            "anthropic-version": "2023-06-01",
+            "claude-version": "2023-06-01",
             "content-type": "application/json"
         }
         
@@ -181,7 +181,7 @@ def main():
     
     # Check Environment
     if not API_KEY:
-        log("CRITICAL ERROR: ANTHROPIC_API_KEY is not set.")
+        log("CRITICAL ERROR: CLAUDE_API_KEY is not set.")
         sys.exit(1)
     else:
         log(f"API Key present (starts with {API_KEY[:4]}...)")
