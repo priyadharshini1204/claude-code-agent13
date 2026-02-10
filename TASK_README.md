@@ -288,4 +288,3 @@ This hackathon is about creating a complete, working solution that you can demon
 - Working GitHub repository
 
 Good luck! 🚀
-
